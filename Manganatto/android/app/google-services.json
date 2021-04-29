@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "995035221930",
+    "project_id": "mangatto-e8234",
+    "storage_bucket": "mangatto-e8234.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995035221930:android:451f51d61e7b4bb16a65d3",
+        "android_client_info": {
+          "package_name": "com.mangatto.mobdev_practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "995035221930-njttpvjakkt9dh1h4r531477r31n9n16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFYImsKGPwf1Sln3QQErD_VnRAFhX7m0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995035221930-njttpvjakkt9dh1h4r531477r31n9n16.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
