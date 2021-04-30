@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mobdev_practice/services/auth.dart';
 import 'package:mobdev_practice/widgets/widgets.dart';
+import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
+import 'package:mobdev_practice/models/models.dart';
+import 'package:mobdev_practice/main/register.dart';
 
 class Login extends StatefulWidget {
   
-  final Function toggleForm;
-  Login({Key key,this.toggleForm}) : super(key: key);
+  Login({Key key}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
@@ -19,6 +22,10 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final Authenticate auth = Authenticate();
   bool isloading = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final controller = ScrollController();
+  bool changeColorAppBar = false;
+  bool openDrawer = false;
 
   @override
   void initState(){
@@ -27,16 +34,48 @@ class _LoginState extends State<Login> {
   }
   
   Widget build(BuildContext context) {
-    return isloading? showLoading(): Scaffold(
+
+    final user = Provider.of<UserFirebase>(context);
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text('Mangatto',style: TextStyle(color: Colors.white,fontSize: 21,letterSpacing: -1),),
+        backgroundColor:changeColorAppBar?Colors.black.withOpacity(0.95) : Colors.transparent,
+        elevation: 0,
+        leading: IconButton(icon: Icon(Icons.menu,color: Colors.white,size: 28,),onPressed: (){setState(()=>openDrawer=!openDrawer); customDrawer(context,openDrawer) ;},),
+        actions: [
+          IconButton(icon: Icon(Icons.search,color: Colors.white,size: 28),onPressed: (){},)
+        ],
+      ),
+      body: Scaffold(
+        key: _scaffoldKey,
+          drawer: Container(
+            width: 250,
+            color: Color(0xff15191b),
+            child: customdrawer(context,user)
+          ),
+            body: NotificationListener<UserScrollNotification>(
+            onNotification: (notification){
+              setState(() {
+                if((controller.position.userScrollDirection == ScrollDirection.reverse)||(controller.position.pixels!=0)){
+                  changeColorAppBar = true;
+                }else{
+                  changeColorAppBar = false;
+                }
+              });
+              return true;
+            },
+            child: isloading? showLoading(): Scaffold(
         body: Container(
           decoration: BoxDecoration(image: DecorationImage(image: AssetImage('lib/assets/4.png'),fit: BoxFit.cover)),
           child: Container(
             color: Color(0xff15191b).withOpacity(0.95),
             child: Center(
             child: SingleChildScrollView(
+              controller: controller,
                 child: Container(
-                padding: EdgeInsets.only(top:100,left: 35,right: 35),
-                height: 560,
+                padding: EdgeInsets.only(top:150,left: 35,right: 35),
+                height: 730,
                 child: Form(
                   key: _formKey,
                     child: Column(
@@ -100,7 +139,7 @@ class _LoginState extends State<Login> {
                          if (_formKey.currentState.validate()) {
                            setState(()=>isloading = !isloading );
                             _formKey.currentState.save();
-                            await auth.signIn(_emailcontroller.text,_passwordcontroller.text);
+                            await auth.signIn(context,_emailcontroller.text,_passwordcontroller.text);
                             setState(() => isloading = !isloading);
                          }
                       },
@@ -115,7 +154,7 @@ class _LoginState extends State<Login> {
                       SizedBox(height: 7),
                       Center(child: TextButton(child: Text('Forgot Password?',style: TextStyle(fontSize: 18,color: Colors.white70),),onPressed: (){},),),
                       SizedBox(height: 20),
-                      Center(child: TextButton(child: Text('Create Account? Sign Up',style: TextStyle(fontSize: 18.5,color: Colors.white),),onPressed: (){widget.toggleForm();})),
+                      Center(child: TextButton(child: Text('Create Account? Sign Up',style: TextStyle(fontSize: 18.5,color: Colors.white),),onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Register()));})),
                     ],
                   ),
                 ),
@@ -124,7 +163,17 @@ class _LoginState extends State<Login> {
             ),
           ),
         )
+    )
+        ),
+      ),
     );
+  }
+  void customDrawer(BuildContext context,bool openDrawer){
+    if(openDrawer){
+       _scaffoldKey.currentState.openDrawer();
+    }else{
+      Navigator.pop(context);
+    }
   }
 }
 

@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobdev_practice/screens/home.dart';
+import 'package:mobdev_practice/main/home.dart';
 
 
 void main() {

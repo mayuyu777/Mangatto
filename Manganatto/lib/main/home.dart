@@ -1,8 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:mobdev_practice/widgets/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:mobdev_practice/models/models.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 
@@ -19,23 +20,30 @@ class _HomepageState extends State<Homepage> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final controller = ScrollController();
-  final searchcontroller = TextEditingController();
   bool changeColorAppBar = false;
-  bool isDrawerOpen = false;
-  FirebaseAuth auth = FirebaseAuth.instance;
+  bool openDrawer = false;
    
   @override
 
   Widget build(BuildContext context) {
+    final user = Provider.of<UserFirebase>(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: customappbar(changeColorAppBar,_scaffoldKey),
+      appBar: AppBar(
+        title: Text('Mangatto',style: TextStyle(color: Colors.white,fontSize: 21,letterSpacing: -1),),
+        backgroundColor:changeColorAppBar?Colors.black.withOpacity(0.95) : Colors.transparent,
+        elevation: 0,
+        leading: IconButton(icon: Icon(Icons.menu,color: Colors.white,size: 28,),onPressed: (){setState(()=>openDrawer=!openDrawer); customDrawer(context,openDrawer) ;},),
+        actions: [
+          IconButton(icon: Icon(Icons.search,color: Colors.white,size: 28),onPressed: (){},)
+        ],
+      ),
       body: Scaffold(
         key: _scaffoldKey,
           drawer: Container(
             width: 250,
             color: Color(0xff15191b),
-            child: customdrawer()
+            child: customdrawer(context,user)
           ),
             body: NotificationListener<UserScrollNotification>(
             onNotification: (notification){
@@ -64,7 +72,7 @@ class _HomepageState extends State<Homepage> {
                       dotBgColor: Colors.transparent,
                       images: [
                         Container(
-                            color: Colors.blueAccent,
+                            color: Color(0xff15191b),
                             child: Stack(
                             fit: StackFit.expand,
                             children: [
@@ -100,7 +108,7 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                          Container(
-                            color: Colors.blueAccent,
+                            color: Color(0xff15191b),
                             child: Stack(
                             fit: StackFit.expand,
                             children: [
@@ -136,7 +144,7 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                         Container(
-                            color: Colors.blueAccent,
+                            color: Color(0xff15191b),
                             child: Stack(
                             fit: StackFit.expand,
                             children: [
@@ -172,7 +180,7 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                         Container(
-                            color: Colors.blueAccent,
+                            color: Color(0xff15191b),
                             child: Stack(
                             fit: StackFit.expand,
                             children: [
@@ -211,16 +219,19 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                   Container(
-                    height: 25,
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text('Latest',style: TextStyle(color: Colors.white,fontSize: 22,letterSpacing: 1),)),
-                      padding: EdgeInsets.only(left: 10),
-                  ),
+                    height: 35,
+                    padding: EdgeInsets.only(left: 10,right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:[
+                      Align(alignment: Alignment.bottomLeft,child: Text('Latest',style: TextStyle(color: Colors.white,fontSize: 22,letterSpacing: 1))),
+                      OutlinedButton(style: OutlinedButton.styleFrom(side: BorderSide(color: Colors.grey[850],width: 1.5)),onPressed: (){},child: Text("ALL",style: TextStyle(color: Colors.white70,fontSize: 18,letterSpacing: 1,fontWeight: FontWeight.w400)),)
+                    ]
+                  ),),
                   Container(
-                    height: 240,
+                    height: 250,
                     width: 410,
-                    margin: EdgeInsets.only(bottom: 10,top:5),
+                    margin: EdgeInsets.only(bottom: 20,top:10),
                     child: FractionallySizedBox(
                       heightFactor: 1,
                       widthFactor: 1,
@@ -408,16 +419,20 @@ class _HomepageState extends State<Homepage> {
                     )
                   ),
                   Container(
-                    height: 25,
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text('Hot',style: TextStyle(color: Colors.white,fontSize: 22,letterSpacing: 1),)),
-                      padding: EdgeInsets.only(left: 10),
+                   height: 35,
+                    padding: EdgeInsets.only(left: 10,right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:[
+                      Align(alignment: Alignment.bottomLeft,child: Text('Hot',style: TextStyle(color: Colors.white,fontSize: 22,letterSpacing: 1))),
+                      OutlinedButton(style: OutlinedButton.styleFrom(side: BorderSide(color: Colors.grey[850],width: 1.5)),onPressed: (){},child: Text("ALL",style: TextStyle(color: Colors.white70,fontSize: 18,letterSpacing: 1,fontWeight: FontWeight.w400)),)
+                    ]
+                  )
                   ),
                   Container(
-                    height: 240,
+                    height: 250,
                     width: 410,
-                    margin: EdgeInsets.only(bottom: 10,top:5),
+                    margin: EdgeInsets.only(bottom: 20,top:10),
                     child: FractionallySizedBox(
                       heightFactor: 1,
                       widthFactor: 1,
@@ -611,5 +626,14 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
     );
+  }
+
+
+  void customDrawer(BuildContext context,bool openDrawer){
+    if(openDrawer){
+       _scaffoldKey.currentState.openDrawer();
+    }else{
+      Navigator.pop(context);
+    }
   }
 }

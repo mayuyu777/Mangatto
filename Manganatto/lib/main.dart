@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:mobdev_practice/models/models.dart';
-import 'package:mobdev_practice/screens/landing.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'services/auth.dart';
+import 'package:mobdev_practice/main/home.dart';
 
 
 
@@ -16,7 +16,7 @@ void main() async{
       initialData: null,
       child: MaterialApp(
       theme: ThemeData(brightness: Brightness.dark,accentColor: Colors.yellow[700].withOpacity(0.9),),  
-      home: Landing(),
+      home: Homepage(),
     ),
   ));
 }
