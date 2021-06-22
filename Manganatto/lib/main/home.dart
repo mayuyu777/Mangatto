@@ -334,18 +334,6 @@ class _HomepageState extends State<Homepage> {
                                         color: Colors.white,
                                         fontSize: 22,
                                         letterSpacing: 1))),
-                            OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                  side: BorderSide(
-                                      color: Colors.grey[850], width: 1.5)),
-                              onPressed: () {},
-                              child: Text("ALL",
-                                  style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 18,
-                                      letterSpacing: 1,
-                                      fontWeight: FontWeight.w400)),
-                            )
                           ]),
                     ),
                     SizedBox(
@@ -462,18 +450,6 @@ class _HomepageState extends State<Homepage> {
                                         color: Colors.white,
                                         fontSize: 22,
                                         letterSpacing: 1))),
-                            OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                  side: BorderSide(
-                                      color: Colors.grey[850], width: 1.5)),
-                              onPressed: () {},
-                              child: Text("ALL",
-                                  style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 18,
-                                      letterSpacing: 1,
-                                      fontWeight: FontWeight.w400)),
-                            )
                           ]),
                     ),
                     SizedBox(
@@ -585,18 +561,6 @@ class _HomepageState extends State<Homepage> {
                                         color: Colors.white,
                                         fontSize: 22,
                                         letterSpacing: 1))),
-                            OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                  side: BorderSide(
-                                      color: Colors.grey[850], width: 1.5)),
-                              onPressed: () {},
-                              child: Text("ALL",
-                                  style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 18,
-                                      letterSpacing: 1,
-                                      fontWeight: FontWeight.w400)),
-                            )
                           ]),
                     ),
                     SizedBox(
@@ -708,18 +672,6 @@ class _HomepageState extends State<Homepage> {
                                         color: Colors.white,
                                         fontSize: 22,
                                         letterSpacing: 1))),
-                            OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                  side: BorderSide(
-                                      color: Colors.grey[850], width: 1.5)),
-                              onPressed: () {},
-                              child: Text("ALL",
-                                  style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 18,
-                                      letterSpacing: 1,
-                                      fontWeight: FontWeight.w400)),
-                            )
                           ]),
                     ),
                     SizedBox(
