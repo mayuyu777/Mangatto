@@ -32,6 +32,7 @@ class _MangaDetailsState extends State<MangaDetails> {
   Widget build(BuildContext context) {
     final user = Provider.of<UserFirebase>(context);
     return Scaffold(
+      backgroundColor: Color(0xff15191b),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
@@ -154,7 +155,7 @@ class _MangaDetailsState extends State<MangaDetails> {
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      'Genre',
+                                      'Genres',
                                       style: TextStyle(fontSize: 20),
                                     ),
                                   ),

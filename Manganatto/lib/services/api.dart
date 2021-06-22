@@ -18,7 +18,6 @@ class API {
             item['attributes']['titles']['en_jp'],
             null,
             item['attributes']['synopsis'],
-            item['attributes']['userCount'],
             item['attributes']['averageRating'],
             item['attributes']['posterImage']['large']);
         mangas.add(manga);
@@ -50,7 +49,6 @@ class API {
           item['attributes']['titles']['en_jp'],
           genre,
           item['attributes']['synopsis'],
-          item['attributes']['userCount'],
           item['attributes']['averageRating'],
           item['attributes']['posterImage']['large']);
     }

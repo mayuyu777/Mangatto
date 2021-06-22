@@ -77,16 +77,6 @@ List<Widget> account(
                 MaterialPageRoute(
                     builder: (BuildContext context) => Homepage()));
           }),
-      ListTile(
-          leading: Icon(
-            Icons.bookmark,
-            size: 30,
-          ),
-          title: Text(
-            'Genre',
-            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
-          ),
-          onTap: () {}),
       Divider(
         color: Colors.grey[400],
         thickness: 0.2,

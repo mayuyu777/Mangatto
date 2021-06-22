@@ -16,10 +16,9 @@ class Manga {
   String title;
   List<String> genre;
   String synopsis;
-  int views;
   String rate;
   String imageurl;
 
-  Manga(this.id, this.title, this.genre, this.synopsis, this.views, this.rate,
-      this.imageurl);
+  Manga(
+      this.id, this.title, this.genre, this.synopsis, this.rate, this.imageurl);
 }

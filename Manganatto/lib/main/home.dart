@@ -20,11 +20,17 @@ class _HomepageState extends State<Homepage> {
   final controller = ScrollController();
   bool changeColorAppBar = false;
   bool openDrawer = false;
-  Future<List<Manga>> _mangas;
+  Future<List<Manga>> _adventure;
+  Future<List<Manga>> _romance;
+  Future<List<Manga>> _comedy;
+  Future<List<Manga>> _scifi;
 
   @override
   void initState() {
-    _mangas = API().getMangaCollection('adventure');
+    _adventure = API().getMangaCollection('adventure');
+    _romance = API().getMangaCollection('romance');
+    _comedy = API().getMangaCollection('comedy');
+    _scifi = API().getMangaCollection('sci-fi');
     super.initState();
   }
 
@@ -83,7 +89,7 @@ class _HomepageState extends State<Homepage> {
             controller: controller,
             child: Container(
                 color: Color(0xff15191b),
-                height: 1500,
+                height: 1700,
                 child: Column(
                   children: [
                     Container(
@@ -352,7 +358,7 @@ class _HomepageState extends State<Homepage> {
                       height: 15,
                     ),
                     FutureBuilder<List<Manga>>(
-                      future: _mangas,
+                      future: _adventure,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return SizedBox(
@@ -448,7 +454,376 @@ class _HomepageState extends State<Homepage> {
                           );
                         }
                       },
-                    )
+                    ),
+                    Container(
+                      height: 35,
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Text('Romance',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        letterSpacing: 1))),
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                  side: BorderSide(
+                                      color: Colors.grey[850], width: 1.5)),
+                              onPressed: () {},
+                              child: Text("ALL",
+                                  style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 18,
+                                      letterSpacing: 1,
+                                      fontWeight: FontWeight.w400)),
+                            )
+                          ]),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    FutureBuilder<List<Manga>>(
+                      future: _romance,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return SizedBox(
+                              height: 230,
+                              child: new ListView.builder(
+                                padding: EdgeInsets.only(left: 10),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  MangaDetails(
+                                                      id: snapshot
+                                                          .data[index].id)));
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              const Radius.circular(5)),
+                                          color: Colors.grey[850],
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black.withOpacity(
+                                                    0.3), //color of shadow
+                                                spreadRadius: 1, //spread radius
+                                                blurRadius: 3,
+                                                offset:
+                                                    Offset(0, 2) // blur radius
+                                                )
+                                          ]),
+                                      width: 150,
+                                      margin: EdgeInsets.only(
+                                          top: 5, bottom: 10, right: 10),
+                                      child: Stack(
+                                        children: [
+                                          Align(
+                                              alignment: Alignment.topCenter,
+                                              child: FractionallySizedBox(
+                                                heightFactor: 0.65,
+                                                widthFactor: 1,
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    5),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    5)),
+                                                    image: DecorationImage(
+                                                        image: NetworkImage(
+                                                            snapshot.data[index]
+                                                                .imageurl),
+                                                        fit: BoxFit.cover),
+                                                  ),
+                                                ),
+                                              )),
+                                          Positioned(
+                                            bottom: 13,
+                                            left: 10,
+                                            child: Container(
+                                              width: 130,
+                                              height: 50,
+                                              child: Text(
+                                                snapshot.data[index].title,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ));
+                        } else {
+                          return Container(
+                            height: 0,
+                            width: 0,
+                          );
+                        }
+                      },
+                    ),
+                    Container(
+                      height: 35,
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Text('Comedy',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        letterSpacing: 1))),
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                  side: BorderSide(
+                                      color: Colors.grey[850], width: 1.5)),
+                              onPressed: () {},
+                              child: Text("ALL",
+                                  style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 18,
+                                      letterSpacing: 1,
+                                      fontWeight: FontWeight.w400)),
+                            )
+                          ]),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    FutureBuilder<List<Manga>>(
+                      future: _comedy,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return SizedBox(
+                              height: 230,
+                              child: new ListView.builder(
+                                padding: EdgeInsets.only(left: 10),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  MangaDetails(
+                                                      id: snapshot
+                                                          .data[index].id)));
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              const Radius.circular(5)),
+                                          color: Colors.grey[850],
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black.withOpacity(
+                                                    0.3), //color of shadow
+                                                spreadRadius: 1, //spread radius
+                                                blurRadius: 3,
+                                                offset:
+                                                    Offset(0, 2) // blur radius
+                                                )
+                                          ]),
+                                      width: 150,
+                                      margin: EdgeInsets.only(
+                                          top: 5, bottom: 10, right: 10),
+                                      child: Stack(
+                                        children: [
+                                          Align(
+                                              alignment: Alignment.topCenter,
+                                              child: FractionallySizedBox(
+                                                heightFactor: 0.65,
+                                                widthFactor: 1,
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    5),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    5)),
+                                                    image: DecorationImage(
+                                                        image: NetworkImage(
+                                                            snapshot.data[index]
+                                                                .imageurl),
+                                                        fit: BoxFit.cover),
+                                                  ),
+                                                ),
+                                              )),
+                                          Positioned(
+                                            bottom: 13,
+                                            left: 10,
+                                            child: Container(
+                                              width: 130,
+                                              height: 50,
+                                              child: Text(
+                                                snapshot.data[index].title,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ));
+                        } else {
+                          return Container(
+                            height: 0,
+                            width: 0,
+                          );
+                        }
+                      },
+                    ),
+                    Container(
+                      height: 35,
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Text('Sci-fi',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        letterSpacing: 1))),
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                  side: BorderSide(
+                                      color: Colors.grey[850], width: 1.5)),
+                              onPressed: () {},
+                              child: Text("ALL",
+                                  style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 18,
+                                      letterSpacing: 1,
+                                      fontWeight: FontWeight.w400)),
+                            )
+                          ]),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    FutureBuilder<List<Manga>>(
+                      future: _scifi,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return SizedBox(
+                              height: 230,
+                              child: new ListView.builder(
+                                padding: EdgeInsets.only(left: 10),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  MangaDetails(
+                                                      id: snapshot
+                                                          .data[index].id)));
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              const Radius.circular(5)),
+                                          color: Colors.grey[850],
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black.withOpacity(
+                                                    0.3), //color of shadow
+                                                spreadRadius: 1, //spread radius
+                                                blurRadius: 3,
+                                                offset:
+                                                    Offset(0, 2) // blur radius
+                                                )
+                                          ]),
+                                      width: 150,
+                                      margin: EdgeInsets.only(
+                                          top: 5, bottom: 10, right: 10),
+                                      child: Stack(
+                                        children: [
+                                          Align(
+                                              alignment: Alignment.topCenter,
+                                              child: FractionallySizedBox(
+                                                heightFactor: 0.65,
+                                                widthFactor: 1,
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    5),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    5)),
+                                                    image: DecorationImage(
+                                                        image: NetworkImage(
+                                                            snapshot.data[index]
+                                                                .imageurl),
+                                                        fit: BoxFit.cover),
+                                                  ),
+                                                ),
+                                              )),
+                                          Positioned(
+                                            bottom: 13,
+                                            left: 10,
+                                            child: Container(
+                                              width: 130,
+                                              height: 50,
+                                              child: Text(
+                                                snapshot.data[index].title,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ));
+                        } else {
+                          return Container(
+                            height: 0,
+                            width: 0,
+                          );
+                        }
+                      },
+                    ),
                   ],
                 )),
           ),
