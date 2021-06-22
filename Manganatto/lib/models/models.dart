@@ -1,29 +1,25 @@
-
-
 class UserFirebase {
-   final String uuid;
+  final String uuid;
 
   UserFirebase({this.uuid});
-
 }
 
 class UserData {
   final String name;
   final String address;
-  
-  UserData({this.name,this.address});
+
+  UserData({this.name, this.address});
 }
 
 class Manga {
+  String id;
+  String title;
+  List<String> genre;
+  String synopsis;
+  int views;
+  String rate;
+  String imageurl;
 
-  final String id;
-  final String title;
-  final List<String> authors;
-  final List<int> genre;
-  final String desc;
-  final int views;
-  final double rate;
-  
-  Manga({this.id,this.title,this.authors,this.genre,this.desc,this.views,this.rate});
-
+  Manga(this.id, this.title, this.genre, this.synopsis, this.views, this.rate,
+      this.imageurl);
 }

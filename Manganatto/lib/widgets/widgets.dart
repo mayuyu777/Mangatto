@@ -7,51 +7,166 @@ import 'package:mobdev_practice/main/home.dart';
 import 'package:mobdev_practice/main/login.dart';
 import 'package:mobdev_practice/main/register.dart';
 
-
-Widget customdrawer(BuildContext context,UserFirebase user){
+Widget customdrawer(BuildContext context, UserFirebase user) {
   final Authenticate _auth = Authenticate();
   return Drawer(
-  child: Container(
+    child: Container(
       margin: EdgeInsets.only(top: 80),
-        child: SingleChildScrollView(
-          child: Container(
-            height: 740,
-            child: Column(
-                children: [
-                  Divider(color: Colors.grey[400],thickness: 0.2,),
-                  ListTile(leading: Icon(Icons.home,size: 30,),title: Text('Home',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Homepage()));}),
-                  ListTile(leading: Icon(Icons.star,size: 30,),title: Text('Popular',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: (){}),
-                  ListTile(leading: Icon(Icons.list,size: 30,),title: Text('Genre',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: (){}),
-                  ...account(context,user,_auth),
-                  Divider(color: Colors.grey[400],thickness: 0.2,),
-                  ListTile(title: Text('CONNECT',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400,color: Colors.grey),)),
-                  ListTile(leading: Icon(Icons.info,size: 30,),title: Text('About Us',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: (){}),
-                  ListTile(leading: Icon(Icons.message,size: 30,),title: Text('Contact Us',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: (){}),
-                ],
+      child: SingleChildScrollView(
+        child: Container(
+          height: 740,
+          child: Column(
+            children: [
+              ...account(context, user, _auth),
+              Divider(
+                color: Colors.grey[400],
+                thickness: 0.2,
               ),
+              ListTile(
+                  title: Text(
+                'CONNECT',
+                style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey),
+              )),
+              ListTile(
+                  leading: Icon(
+                    Icons.info,
+                    size: 30,
+                  ),
+                  title: Text(
+                    'About Us',
+                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
+                  ),
+                  onTap: () {}),
+              ListTile(
+                  leading: Icon(
+                    Icons.message,
+                    size: 30,
+                  ),
+                  title: Text(
+                    'Contact Us',
+                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
+                  ),
+                  onTap: () {}),
+            ],
           ),
         ),
-  ),
+      ),
+    ),
   );
 }
 
-List<Widget> account(BuildContext context,UserFirebase user,Authenticate _auth){
-  if(user!=null){
-    return [ListTile(leading: Icon(Icons.bookmark,size: 30,),title: Text('Bookmark',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: (){}),
-            ListTile(leading: Icon(Icons.notifications,size: 30,),title: Text('Notification',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: (){}),
-            Divider(color: Colors.grey[400],thickness: 0.2,),
-            ListTile(title: Text('ACCOUNT',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400,color: Colors.grey),)),
-            ListTile(leading: Icon(Icons.person,size: 30,),title: Text('Profile',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: (){}),
-            ListTile(leading: Icon(Icons.logout,size: 30,),title: Text('Logout',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: ()async{await _auth.logout();Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Homepage()));}),];
-  }else{
-    return [Divider(color: Colors.grey[400],thickness: 0.2,),
-            ListTile(title: Text('ACCOUNT',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400,color: Colors.grey),)),
-            ListTile(leading: Icon(Icons.person,size: 30,),title: Text('Sign In',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Login()));}),
-            ListTile(leading: Icon(Icons.logout,size: 30,),title: Text('Register',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w400),),onTap: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Register()));}),];
+List<Widget> account(
+    BuildContext context, UserFirebase user, Authenticate _auth) {
+  if (user != null) {
+    return [
+      ListTile(
+          leading: Icon(
+            Icons.home,
+            size: 30,
+          ),
+          title: Text(
+            'Home',
+            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
+          ),
+          onTap: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => Homepage()));
+          }),
+      ListTile(
+          leading: Icon(
+            Icons.bookmark,
+            size: 30,
+          ),
+          title: Text(
+            'Genre',
+            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
+          ),
+          onTap: () {}),
+      Divider(
+        color: Colors.grey[400],
+        thickness: 0.2,
+      ),
+      ListTile(
+          title: Text(
+        'ACCOUNT',
+        style: TextStyle(
+            fontSize: 19, fontWeight: FontWeight.w400, color: Colors.grey),
+      )),
+      ListTile(
+          leading: Icon(
+            Icons.person,
+            size: 30,
+          ),
+          title: Text(
+            'Profile',
+            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
+          ),
+          onTap: () {}),
+      ListTile(
+          leading: Icon(
+            Icons.logout,
+            size: 30,
+          ),
+          title: Text(
+            'Logout',
+            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
+          ),
+          onTap: () async {
+            await _auth.logout();
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (BuildContext context) => Login()));
+          }),
+    ];
+  } else {
+    return [
+      Divider(
+        color: Colors.grey[400],
+        thickness: 0.2,
+      ),
+      ListTile(
+          title: Text(
+        'ACCOUNT',
+        style: TextStyle(
+            fontSize: 19, fontWeight: FontWeight.w400, color: Colors.grey),
+      )),
+      ListTile(
+          leading: Icon(
+            Icons.person,
+            size: 30,
+          ),
+          title: Text(
+            'Sign In',
+            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
+          ),
+          onTap: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (BuildContext context) => Login()));
+          }),
+      ListTile(
+          leading: Icon(
+            Icons.logout,
+            size: 30,
+          ),
+          title: Text(
+            'Register',
+            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
+          ),
+          onTap: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => Register()));
+          }),
+    ];
   }
 }
 
-Widget showLoading(){
+Widget showLoading() {
   return Scaffold(
     backgroundColor: Color(0xff15191b),
     body: Center(
