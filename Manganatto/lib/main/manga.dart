@@ -55,12 +55,6 @@ class _MangaDetailsState extends State<MangaDetails> {
             customDrawer(context, openDrawer);
           },
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search, color: Colors.white, size: 28),
-            onPressed: () {},
-          )
-        ],
       ),
       body: Scaffold(
         key: _scaffoldKey,

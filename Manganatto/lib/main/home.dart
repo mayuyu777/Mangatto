@@ -59,12 +59,6 @@ class _HomepageState extends State<Homepage> {
             customDrawer(context, openDrawer);
           },
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search, color: Colors.white, size: 28),
-            onPressed: () {},
-          )
-        ],
       ),
       body: Scaffold(
         key: _scaffoldKey,
